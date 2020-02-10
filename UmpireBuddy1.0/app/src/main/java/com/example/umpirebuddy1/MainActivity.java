@@ -16,25 +16,21 @@ private int numBalls = 0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    /// wire up the button
+        /// wire up the button
         /// get the button
         ///get what happens when the user clicls
-        Button btnStrike = (Button) findViewById(R.id.btnStrike);
 
-       btnStrike.setOnClickListener(new View.OnClickListener() {
+        Button btnStrikes = (Button) findViewById(R.id.btnStrike);
+        btnStrike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 numStrikes += 1;
-                if (numStrikes > 2 ){
+                if (numStrikes > 2) {
                     numStrikes = 0;
-                    numBalls =0;
+                    numBalls = 0;
+                    textViewWalkOut = "OUT";
                 }
                 updateControlStates();
-
-
-
-
-
             }
         });
         Button btnBalls = (Button) findViewById(R.id.btnBalls);
@@ -43,15 +39,12 @@ private int numBalls = 0;
             @Override
             public void onClick(View view) {
                 numBalls += 1;
-                if (numBalls > 3 ){
+                if (numBalls > 3) {
                     numBalls = 0;
-                    numStrikes =0;
+                    numStrikes = 0;
+                    textViewWalkOut = "WALK";
                 }
                 updateControlStates();
-
-
-
-
 
             }
         });
@@ -59,12 +52,18 @@ private int numBalls = 0;
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                numStrikes =0;
-                numBalls =0;
+                numStrikes = 0;
+                numBalls = 0;
                 updateControlStates();
             }
-
-
+        });
+        Button btnAbout = findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textViewAbout = "Umpire Buddy 2.0 - Byron Nave";
+                updateControlStates();
+            }
         });
 
         Button btnExit = findViewById(R.id.btnExit);
@@ -72,7 +71,7 @@ private int numBalls = 0;
             @Override
             public void onClick(View view) {
                 Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
             }
@@ -80,9 +79,9 @@ private int numBalls = 0;
 
         });
 
-
-
     }
+
+
 
 
 
@@ -93,6 +92,10 @@ private int numBalls = 0;
         textViewStrikes.setText(String.valueOf(numStrikes));
         TextView textViewBalls = findViewById(R.id.numBalls);
         textViewBalls.setText(String.valueOf(numBalls));
+        TextView textViewAbout = findViewById(R.id.textViewAbout);
+        textViewStrikes.setText(String.valueOf(textViewAbout));
+        TextView textViewWalkOut = findViewById(R.id.textViewWalkOut);
+        textViewStrikes.setText(String.valueOf(textViewWalkOut));
 
     }
 }
